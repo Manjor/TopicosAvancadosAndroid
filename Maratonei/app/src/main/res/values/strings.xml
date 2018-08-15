@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Maratonei</string>
+    <string name="tabLista">Minha Lista</string>
+    <string name="tabFilmes">Filmes</string>
+    <string name="tabSeries">Series</string>
+    <string name="listaFavoritosVazia">Você ainda não adicionou nenhum filme ou series a sua lista de favoritos.</string>
+    <string name="emCartaz">Filmes em Cartaz</string>
+    <string name="filmesPopulares">Filmes Populares</string>
+    <string name="seriesNovas">Ultimos Adicionados</string>
+</resources>
