@@ -7,4 +7,12 @@
     <string name="emCartaz">Filmes em Cartaz</string>
     <string name="filmesPopulares">Filmes Populares</string>
     <string name="seriesNovas">Ultimos Adicionados</string>
+    <string name="catCartaz">Em Cartaz</string>
+    <string name="catAcao">Ação</string>
+    <string name="catComedia">Comédia</string>
+    <string name="catAventura">Aventura</string>
+    <string name="catDrama">Drama</string>
+    <string name="catTerror">Terror</string>
+    <string name="catGuerra">Guerra</string>
+    <string name="catAnimacao">Animação</string>
 </resources>
