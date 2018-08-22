@@ -28,5 +28,6 @@ public class TelaPrincipal extends AppCompatActivity {
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
 
+
     }
 }
