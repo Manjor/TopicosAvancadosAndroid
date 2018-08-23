@@ -3,6 +3,8 @@ package com.example.a06079050188.projetomaratonei;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +30,9 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
     //Cria uma referência de View
     View view;
     //Cria a instancia dos Atributos
-    private Button botaoRecuperar;
-    private TextView textoResultado;
-    private ImageView imageView;
 
+    private RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
 
     //Define as strings que serão utilizadas para consumir a API
     //Token de Acesso a
@@ -44,13 +45,39 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.seriesfragment,container,false);
 
-        textoResultado = view.findViewById(R.id.textResultado);
+        recyclerView = view.findViewById(R.id.recyclerSeries);
 
-        imageView = (ImageView) view.findViewById(R.id.imageView);
+        recyclerView.setLayoutManager(layoutManager);
+
+        PostagemAdapter adapter = new PostagemAdapter();
+        recyclerView.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         MyTask task = new MyTask();
-
-
         String urlConsultaSeriesPopulares = baseApi + "tv/popular?api_key=" + chaveApi + "&page=1";
 
         task.execute(urlConsultaSeriesPopulares);
