@@ -1,6 +1,5 @@
 package com.example.a06079050188.projetomaratonei;
 
-import android.app.Fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,31 +21,39 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.concurrent.ExecutionException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FragmentoSeries extends android.support.v4.app.Fragment {
+    //Cria uma referência de View
     View view;
+    //Cria a instancia dos Atributos
     private Button botaoRecuperar;
     private TextView textoResultado;
+    private ImageView imageView;
+
+
+    //Define as strings que serão utilizadas para consumir a API
+    //Token de Acesso a
+    String baseApi = "https://api.themoviedb.org/3/";
+    String urlImagensAPi = "https://image.tmdb.org/t/p/original";
+    String linguagem = "&language=pt-BR";
+    String chaveApi = "f814673a004bcd3dfd0e837cf1a0b020";
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.seriesfragment,container,false);
 
-        botaoRecuperar = view.findViewById(R.id.buttonRecuperar);
         textoResultado = view.findViewById(R.id.textResultado);
 
-        botaoRecuperar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        imageView = (ImageView) view.findViewById(R.id.imageView);
 
-                MyTask task = new MyTask();
-                String utlApi = "https://viacep.com.br/ws/77001266/json/";
+        MyTask task = new MyTask();
 
-                task.execute(utlApi);
 
-            }
-        });
+        String urlConsultaSeriesPopulares = baseApi + "tv/popular?api_key=" + chaveApi + "&page=1";
+
+        task.execute(urlConsultaSeriesPopulares);
 
         return view;
     }
@@ -61,6 +68,8 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
 
         @Override
         protected String doInBackground(String... strings) {
+
+
             String stringUrl = strings[0];
             InputStream inputStream = null;
             InputStreamReader inputStreamReader = null;
@@ -106,18 +115,9 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
         @Override
         protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
-            String logradouro = null;
 
-            try {
-                JSONObject jsonObject = new JSONObject(resultado);
-                logradouro = jsonObject.getString("logradouro");
+            //Picasso.get().load(urlBannerFilme + banner).into(imageView);
 
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            textoResultado.setText(logradouro);
         }
     }
 
