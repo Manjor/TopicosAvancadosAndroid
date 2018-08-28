@@ -3,12 +3,12 @@ package com.example.a06079050188.projetomaratonei;
 public class Serie {
 
     private String nomeSerie ;
-    private int imagemSerie;
+    private String imagemSerie;
     private int idSerie;
 
 
     public Serie(){}
-    public Serie(String nomeSerie, int imagemSerie, int idSerie){
+    public Serie(String nomeSerie, String imagemSerie, int idSerie){
 
         this.nomeSerie = nomeSerie;
         this.imagemSerie = imagemSerie;
@@ -25,11 +25,11 @@ public class Serie {
         this.nomeSerie = nomeSerie;
     }
 
-    public int getImagemSerie() {
+    public String getImagemSerie() {
         return imagemSerie;
     }
 
-    public void setImagemSerie(int imagemSerie) {
+    public void setImagemSerie(String imagemSerie) {
         this.imagemSerie = imagemSerie;
     }
 

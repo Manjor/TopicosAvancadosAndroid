@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,6 +29,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.a06079050188.projetomaratonei.R.drawable.vingadores;
+
 public class FragmentoSeries extends android.support.v4.app.Fragment {
     //Cria uma referência de View
     View view;
@@ -33,11 +38,12 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
 
     private RecyclerView recyclerView;
 
-    private List<Serie> series;
+    private List<Serie> series = new ArrayList<>();
 
     //Define as strings que serão utilizadas para consumir a API
     //Token de Acesso a
     String baseApi = "https://api.themoviedb.org/3/";
+
     String urlImagensAPi = "https://image.tmdb.org/t/p/original";
     String linguagem = "&language=pt-BR";
     String chaveApi = "f814673a004bcd3dfd0e837cf1a0b020";
@@ -46,7 +52,6 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.seriesfragment,container,false);
 
-
         recyclerView = view.findViewById(R.id.recycleView);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -54,26 +59,19 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
         //Define o Layout do recycleView
         recyclerView.setLayoutManager(layoutManager);
 
-        //Define o adapter
-        SeriesAdapter seriesAdapter = new SeriesAdapter();
-        recyclerView.setAdapter(seriesAdapter);
-
-
-
-
-
         MyTask task = new MyTask();
-        String urlConsultaSeriesPopulares = baseApi + "tv/popular?api_key=" + chaveApi + "&page=1";
+        String urlConsultaSeriesPopulares = baseApi + "tv/popular?api_key=" + chaveApi + "&page=1" + linguagem;
 
         task.execute(urlConsultaSeriesPopulares);
 
         return view;
     }
 
-    public void preparaCardSeries(){
-        Serie serie = new Serie();
+    public void adicionaSerieCard(String nomeSerie,String imagemSerie, int id)
+    {
+        Serie serie = new Serie(nomeSerie, imagemSerie ,id);
+        this.series.add(serie);
     }
-
 
     class MyTask extends AsyncTask<String,Void,String>{
 
@@ -115,10 +113,7 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
                while(( linha = reader.readLine()) != null ){
 
                    buffer.append( linha );
-
                }
-
-
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
@@ -133,7 +128,37 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
         protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
 
-            //Picasso.get().load(urlBannerFilme + banner).into(imageView);
+            String results = null;
+            String nomeSerie = null;
+            JSONArray jsonArray = null;
+
+            try {
+                JSONObject jsonObject = new JSONObject(resultado);
+                jsonArray = jsonObject.getJSONArray("results");
+
+                for(int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject e = jsonArray.getJSONObject(i);
+                    String strinJsonNomeSerie = e.getString("name");
+                    String backdropJsonSerie = e.getString("backdrop_path");
+                    int idJsonSerie = e.getInt("id");
+                    String urlImagemBanner = urlImagensAPi + backdropJsonSerie;
+
+                    adicionaSerieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);
+
+
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            SeriesAdapter seriesAdapter = new SeriesAdapter( series );
+
+            recyclerView.setAdapter(seriesAdapter);
+
+            Log.i("INFO","JSON: " + jsonArray.toString());
+
 
         }
     }
