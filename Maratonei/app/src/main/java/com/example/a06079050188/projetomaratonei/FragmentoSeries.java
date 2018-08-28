@@ -32,7 +32,8 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
     //Cria a instancia dos Atributos
 
     private RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
+
+    private List<Serie> series;
 
     //Define as strings que serão utilizadas para consumir a API
     //Token de Acesso a
@@ -45,33 +46,17 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.seriesfragment,container,false);
 
-        recyclerView = view.findViewById(R.id.recyclerSeries);
 
+        recyclerView = view.findViewById(R.id.recycleView);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        //Define o Layout do recycleView
         recyclerView.setLayoutManager(layoutManager);
 
-        PostagemAdapter adapter = new PostagemAdapter();
-        recyclerView.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //Define o adapter
+        SeriesAdapter seriesAdapter = new SeriesAdapter();
+        recyclerView.setAdapter(seriesAdapter);
 
 
 
@@ -84,6 +69,11 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
 
         return view;
     }
+
+    public void preparaCardSeries(){
+        Serie serie = new Serie();
+    }
+
 
     class MyTask extends AsyncTask<String,Void,String>{
 
