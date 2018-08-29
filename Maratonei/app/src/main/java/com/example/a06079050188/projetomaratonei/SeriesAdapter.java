@@ -1,5 +1,7 @@
 package com.example.a06079050188.projetomaratonei;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,12 +34,33 @@ public class SeriesAdapter  extends RecyclerView.Adapter<SeriesAdapter.MeuViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MeuViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MeuViewHolder holder, int position) {
 
-        Serie serie = series.get(position);
+
+        final Serie serie = series.get(position);
+        //Seta no textNomeSeie o valor recebido pelo construtor de Serie
         holder.textNomeSerie.setText(serie.getNomeSerie());
+        final int id = serie.getIdSerie();
         Picasso.get().load(serie.getImagemSerie()).into(holder.bannerSerie);
         Log.i("INFO","URL: " + serie.getImagemSerie());
+        holder.bannerSerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Cria um intent que recebe o contexto,e a proxima classe a ser chamada
+                Intent it = new Intent(view.getContext(),DetalhesSeries.class);
+                Bundle bundle = new Bundle();
+                Log.i("INFO", "id:" + id);
+
+                //Envia parametros pelo intent
+                //Nesse caso o id do filme selecionado
+                it.putExtra("id", id);
+                //Para direcionar para o intent é necessário chamar o metodo startActivity
+                //pelo contexto atual
+
+                view.getContext().startActivity(it);
+
+            }
+        });
 
     }
 
