@@ -43,6 +43,16 @@ public class SeriesAdapter  extends RecyclerView.Adapter<SeriesAdapter.MeuViewHo
         final int id = serie.getIdSerie();
         Picasso.get().load(serie.getImagemSerie()).into(holder.bannerSerie);
         Log.i("INFO","URL: " + serie.getImagemSerie());
+
+
+
+
+
+
+
+
+
+
         holder.bannerSerie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
