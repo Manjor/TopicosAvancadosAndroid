@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aula3008</string>
+    <string name="message">Você é Curioso</string>
+    <string name="buttons">SIM!</string>
+    <string name="txtLogin">Login</string>
+    <string name="txtPassword">Senha</string>
+    <string name="txtTitle">Meu Fone</string>
+    <string name="btnLogin">Acessar</string>
+    <string name="invalidLogin">Login Inválido! Por favor, tente novamente.</string>
+    <string name="textLogof">Sair</string>
+</resources>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TelaPrincipal"
+    tools:layout_editor_absoluteY="25dp">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/txtTitle"
+        android:textColor="#fd1057"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editLogin"
+        android:layout_width="255dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="9dp"
+        android:ems="10"
+        android:hint="@string/txtLogin"
+        android:inputType="textPersonName"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/editPassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="255dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:ems="10"
+        android:hint="@string/txtPassword"
+        android:inputType="textPersonName"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/checkBox2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editLogin" />
+
+    <CheckBox
+        android:id="@+id/checkBox2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="22dp"
+        android:text="@string/textConect"
+        android:textColor="@color/colorPrimary"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEnter"
+        app:layout_constraintEnd_toStartOf="@+id/btnEnter"
+        app:layout_constraintStart_toStartOf="@+id/btnEnter"
+        app:layout_constraintTop_toBottomOf="@+id/editPassword" />
+
+    <Button
+        android:id="@+id/btnEnter"
+        android:layout_width="149dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="48dp"
+        android:background="@android:color/white"
+        android:elevation="10dp"
+        android:onClick="trataLogin"
+        android:text="@string/btnLogin"
+        android:textColor="#fd1057"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox2" />
+</android.support.constraint.ConstraintLayout>

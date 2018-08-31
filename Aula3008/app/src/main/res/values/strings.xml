@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Aula3008</string>
+    <string name="message">Are you Curious?</string>
+    <string name="buttons">Yes!</string>
+    <string name="txtLogin">Login</string>
+    <string name="txtPassword">Password</string>
+    <string name="txtTitle">My Phome</string>
+    <string name="btnLogin">Login</string>
+    <string name="textConect">Keep Connected</string>
+    <string name="invalidLogin">Invalid Login! Try again please.</string>
+    <string name="textLogof">Logof</string>
+</resources>
