@@ -59,6 +59,13 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
         //Define o Layout do recycleView
         recyclerView.setLayoutManager(layoutManager);
 
+        //Cria os botões para implementar a ação
+
+
+
+
+
+
         MyTask task = new MyTask();
         String urlConsultaSeriesPopulares = baseApi + "tv/popular?api_key=" + chaveApi + "&page=1" + linguagem;
 
@@ -66,6 +73,9 @@ public class FragmentoSeries extends android.support.v4.app.Fragment {
 
         return view;
     }
+
+
+
 
     public void adicionaSerieCard(String nomeSerie,String imagemSerie, int id)
     {

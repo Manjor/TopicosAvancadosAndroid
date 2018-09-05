@@ -18,7 +18,7 @@ import java.util.List;
 public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHolder>{
 
     //Lista que irá receber os filmes para exibição dos cards
-    private List<Filme> filmes;
+    private List<Filme> filmes = null;
 
     //Construtor do Adapter Recebe uma lista como parametro
     public FilmesAdapter(List<Filme> Listafilmes) {
@@ -46,7 +46,6 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
         //Na imageView
         Picasso.get().load(filme.getImagemFilme()).into(holder.imagemFilme);
         Log.i("INFO","URL: " + filme.getImagemFilme());
-
     }
 
     @Override

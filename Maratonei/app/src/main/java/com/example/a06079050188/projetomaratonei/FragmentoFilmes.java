@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,7 +43,19 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
     String baseApi = "https://api.themoviedb.org/3/";
     String urlImagensAPi = "https://image.tmdb.org/t/p/w500";
     String linguagem = "&language=pt-BR";
-    String chaveApi = "f814673a004bcd3dfd0e837cf1a0b020";
+    String chaveApi = "?api_key=f814673a004bcd3dfd0e837cf1a0b020";
+
+    String urlConsultaFilmes = baseApi + "movie/popular" + chaveApi + "&page=1" + linguagem;;
+
+    //Declara os botões de Categorias de Filmes
+    private Button btnCartaz;
+    private Button btnAcao;
+    private Button btnAventura;
+    private Button btnComedia;
+    private Button btnTerror;
+    private Button btnGuerra;
+    private Button btnFiccao;
+    private Button btnDrama;
 
 
     @Nullable
@@ -57,11 +70,35 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
 
         recyclerFilmes.setLayoutManager(layoutManager);
 
-        MyTask task = new MyTask();
-
-        String urlConsultaFilmes = baseApi + "movie/popular?api_key=" + chaveApi + "&page=1" +linguagem;
+        final MyTask task = new MyTask();
 
         task.execute(urlConsultaFilmes);
+
+        //Cria o objeto do botão de Filmes em Cartaz e seta o valor da url para consulta
+        btnCartaz = view.findViewById(R.id.btnCartaz);
+        btnCartaz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                urlConsultaFilmes = baseApi + "popular" + chaveApi + "&page1" + linguagem;
+                Log.i("INFO","Clicou em Cartaz");
+                task.onPostExecute(urlConsultaFilmes);
+
+            }
+        });
+
+        //Cria o objeto do botao de Filmes de Ação e seta o valor da url para Consulta
+        btnAcao = view.findViewById(R.id.btnAcao);
+        btnAcao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                urlConsultaFilmes = baseApi + "genre/10749/movies" + chaveApi + "&page1" + linguagem;
+                Log.i("INFO","Clicou em Ação");
+                task.onPostExecute(urlConsultaFilmes);
+            }
+        });
+
+
+
 
         return view;
     }
@@ -125,15 +162,14 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
 
         @Override
         protected void onPostExecute(String resultado) {
-            super.onPostExecute(resultado);
 
+            super.onPostExecute(resultado);
             String results = null;
             String nomeSerie = null;
             JSONArray jsonArray = null;
 
             try {
                 JSONObject jsonObject = new JSONObject(resultado);
-                Log.i("INFO","Resultado" + jsonObject.toString());
                 jsonArray = jsonObject.getJSONArray("results");
 
                 for(int i = 0; i < jsonArray.length(); i++)
@@ -155,8 +191,6 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
 
             FilmesAdapter filmesAdapter = new FilmesAdapter( filmes );
             recyclerFilmes.setAdapter(filmesAdapter);
-            Log.i("INFO","JSON: " + jsonArray.toString());
-
         }
     }
 

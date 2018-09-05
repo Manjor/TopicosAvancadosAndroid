@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#EFEFEF"
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,6 +20,7 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#FFF"
                 android:scrollbars="none">
 
                 <LinearLayout
@@ -27,76 +30,108 @@
                     android:scrollbars="none">
 
                     <Button
-                        android:id="@+id/button9"
+                        android:id="@+id/btnCartaz"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="@string/catCartaz" />
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/catCartaz"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button8"
+                        android:id="@+id/btnAcao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="@string/catAcao" />
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/catAcao"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button7"
+                        android:id="@+id/btnAnimacao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="@string/catAnimacao" />
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/catAnimacao"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button6"
+                        android:id="@+id/btnComedia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="@string/catComedia" />
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/catComedia"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button5"
+                        android:id="@+id/btnTerror"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="@string/catTerror" />
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/catTerror"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button4"
+                        android:id="@+id/btnGuerra"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="@string/catGuerra" />
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/catGuerra"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button3"
+                        android:id="@+id/btnFiccao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="Button" />
+                        android:fontFamily="@font/roboto"
+                        android:text="Ficção"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
 
                     <Button
-                        android:id="@+id/button2"
+                        android:id="@+id/btnDrama"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="1dp"
                         android:layout_weight="0"
                         android:background="@android:color/transparent"
-                        android:text="Button" />
+                        android:fontFamily="@font/roboto"
+                        android:text="Drama"
+                        android:textColor="@color/cinzaTexto"
+                        android:textSize="12sp"
+                        android:typeface="normal" />
                 </LinearLayout>
             </HorizontalScrollView>
 

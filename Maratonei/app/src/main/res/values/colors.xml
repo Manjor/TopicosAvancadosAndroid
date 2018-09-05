@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimary">#48c7db</color>
     <color name="colorPrimaryDark">#16262f6e</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorTemaMaratonei">#69d5d5</color>
-    <color name="colorAccentMaratonei">#7FC5C5</color>
-    <color name="corTabLayout">#69d5d5</color>
-    <color name="tabTextColor">#FFF</color>
-    <color name="indicadorColor">#222222</color>
+    <color name="colorTemaMaratonei">#1e0230</color>
+    <color name="colorAccentMaratonei">#48C7DB</color>
+    <color name="corTabLayout">#48C7DB</color>
+    <color name="tabTextColor">#ffffff</color>
+    <color name="indicadorColor">#ffffff</color>
+    <color name="fundoCard">#fdccf8e9</color>
+    <color name="cinzaTexto">#707070</color>
 </resources>
