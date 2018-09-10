@@ -5,12 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,7 +32,9 @@ public class DetalhesSeries extends AppCompatActivity {
     String linguagem = "&language=pt-BR";
     String chaveApi = "f814673a004bcd3dfd0e837cf1a0b020";
     ImageView posterSerie;
-
+    TextView txtResumo;
+    TextView txtNome;
+    TextView txtData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,11 +113,17 @@ public class DetalhesSeries extends AppCompatActivity {
             super.onPostExecute(resultado);
 
             String linkPoster = null;
+            String resumo = null;
+            String nome = null;
+            String data = null;
 
             try {
                 JSONObject jsonObject = new JSONObject(resultado);
 
                 linkPoster = jsonObject.getString("poster_path");
+                resumo = jsonObject.getString("overview");
+                nome = jsonObject.getString("name");
+                data = jsonObject.getString("first_air_date");
                     /*JSONObject e = jsonArray.getJSONObject(i);
                     String strinJsonNomeSerie = e.getString("name");
                     String backdropJsonSerie = e.getString("backdrop_path");
@@ -123,6 +133,12 @@ public class DetalhesSeries extends AppCompatActivity {
                     adicionaSerieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);*/
 
                 posterSerie = findViewById(R.id.imgPosterSerie);
+                txtResumo = findViewById(R.id.txtResumo);
+                txtNome = findViewById(R.id.txtNome);
+                txtData = findViewById(R.id.txtData);
+                txtResumo.setText(resumo);
+                txtNome.setText(nome);
+                txtData.setText(data);
                 Picasso.get().load(urlImagensAPi + linkPoster).into(posterSerie);
 
             } catch (JSONException e) {

@@ -3,9 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorTemaMaratonei</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/verdePrimary</item>
+        <item name="colorPrimaryDark">@color/verdeAccent</item>
+        <item name="colorAccent">@color/verdeAccent</item>
+    </style>
+
+    <style name="TemaMaratonei" parent="AppTheme" >
+        <item name="colorPrimary">@color/tabTextColor</item>
     </style>
 
 </resources>

@@ -9,5 +9,8 @@
     <color name="tabTextColor">#ffffff</color>
     <color name="indicadorColor">#ffffff</color>
     <color name="fundoCard">#fdccf8e9</color>
-    <color name="cinzaTexto">#707070</color>
+    <color name="cinzaTexto">#584D4D</color>
+    <color name="verdePrimary">#69F2CD</color>
+    <color name="verdeAccent">#66DBBB</color>
+    <color name="jornal">#F5F5F5</color>
 </resources>

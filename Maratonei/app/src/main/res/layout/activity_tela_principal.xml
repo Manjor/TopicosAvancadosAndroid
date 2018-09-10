@@ -4,25 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
-    tools:context=".TelaPrincipal"
-    >
+    tools:context=".TelaPrincipal">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabLayout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_marginBottom="15dp"
         app:tabGravity="fill"
-        app:tabIndicatorColor="@color/tabTextColor"
-        app:tabTextColor="@color/indicadorColor"></android.support.design.widget.TabLayout>
+        app:tabIndicatorColor="@color/verdePrimary"
+        app:tabTextColor="@color/cinzaTexto"></android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpage_id"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
-
-
+        android:layout_height="match_parent"
+        android:background="@android:color/white"></android.support.v4.view.ViewPager>
 
 
 </LinearLayout>
