@@ -1,0 +1,17 @@
+
+- suporte a internacionalização do app
+
+- constrant layout:
+    - definir quem voce vai usar para acorar o componente
+    - varinha magica do ConstraintLayout
+
+- duplicação de layout
+    - portrait
+    - landscape
+
+- criaçao de um metodo para o onClick()
+    - implementação na sua activity
+    - if e else para validar login
+
+- criacao de ativity de principal
+    - botao logoff

@@ -1,0 +1,14 @@
+<resources>
+    <!-- tela principal -->
+    <string name="app_name">MyPhome</string>
+    <string name="message1">MyPhone</string>
+    <string name="hide1">Login</string>
+    <string name="hide2">Password</string>
+    <string name="logar">Login</string>
+    <!-- Logado -->
+    <string name="usuario">User</string>
+    <string name="ofertas">Offers</string>
+    <string name="notificacao">Notification</string>
+    <string name="deslogar">Logoff</string>
+    <string name="title_activity_lista_comidas">ListaComidas</string>
+</resources>
