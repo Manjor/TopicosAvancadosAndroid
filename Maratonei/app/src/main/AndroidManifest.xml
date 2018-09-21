@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <!--<activity android:name=".MinhaLista" /> -->
-        <activity android:name=".DetalhesSeries"></activity>
+        <activity android:name=".Series.DetalhesSeries"></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

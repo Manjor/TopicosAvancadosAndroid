@@ -1,11 +1,12 @@
 package com.example.a06079050188.projetomaratonei;
 
-import android.app.Fragment;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.a06079050188.projetomaratonei.Filmes.FragmentoFilmes;
+import com.example.a06079050188.projetomaratonei.Series.FragmentoSeries;
 
 public class TelaPrincipal extends AppCompatActivity {
 
@@ -16,6 +17,9 @@ public class TelaPrincipal extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_principal);
+
+
+
         tabLayout = (TabLayout) findViewById(R.id.tabLayout_id);
         viewPager = (ViewPager) findViewById(R.id.viewpage_id);
 
