@@ -46,14 +46,6 @@ public class SeriesAdapter  extends RecyclerView.Adapter<SeriesAdapter.MeuViewHo
         Log.i("INFO","URL: " + serie.getImagemSerie());
 
 
-
-
-
-
-
-
-
-
         holder.bannerSerie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

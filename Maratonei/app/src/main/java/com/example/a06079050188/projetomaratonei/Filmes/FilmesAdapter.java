@@ -1,5 +1,7 @@
 package com.example.a06079050188.projetomaratonei.Filmes;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.a06079050188.projetomaratonei.R;
+import com.example.a06079050188.projetomaratonei.Series.DetalhesSeries;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -45,6 +48,27 @@ public class FilmesAdapter extends RecyclerView.Adapter<FilmesAdapter.MeuViewHol
         //Na imageView
         Picasso.get().load(filme.getImagemFilme()).into(holder.imagemFilme);
         Log.i("INFO","URL: " + filme.getImagemFilme());
+
+
+        holder.imagemFilme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Cria um intent que recebe o contexto,e a proxima classe a ser chamada
+                Intent it = new Intent(view.getContext(),DetalhesFilmes.class);
+                Bundle bundle = new Bundle();
+                Log.i("INFO", "id:" + id);
+
+                //Envia parametros pelo intent
+                //Nesse caso o id do filme selecionado
+                it.putExtra("id", id);
+                //Para direcionar para o intent é necessário chamar o metodo startActivity
+                //pelo contexto atual
+
+                view.getContext().startActivity(it);
+
+            }
+        });
+
     }
 
     @Override

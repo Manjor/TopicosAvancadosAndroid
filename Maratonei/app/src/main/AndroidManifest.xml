@@ -24,6 +24,7 @@
         </activity>
         <!--<activity android:name=".MinhaLista" /> -->
         <activity android:name=".Series.DetalhesSeries"></activity>
+        <activity android:name=".Filmes.DetalhesFilmes"></activity>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

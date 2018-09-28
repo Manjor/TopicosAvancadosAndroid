@@ -46,8 +46,6 @@ public class DetalhesSeries extends AppCompatActivity {
         //Verifica se foi recebido algum valor pelo Intent
         Log.i("INFO","Recebido: " + idSerie);
 
-
-
         MyTask task = new MyTask();
         String urlDetalhesSerie = baseApi + "tv/" + idSerie +"?api_key=" + chaveApi + linguagem;
 
