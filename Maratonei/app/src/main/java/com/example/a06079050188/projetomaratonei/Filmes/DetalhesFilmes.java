@@ -7,12 +7,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.MediaController;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.example.a06079050188.projetomaratonei.R;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
@@ -55,6 +58,11 @@ public class DetalhesFilmes extends AppCompatActivity {
     String homepage = null;
     String video = null;
 
+    String urlDetalhesFilme = "";
+    String urlVideoVideo = "";
+
+    String retorno = "";
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,20 +80,21 @@ public class DetalhesFilmes extends AppCompatActivity {
 
 
 
-
         int idFilme = this.getIntent().getIntExtra("id",0);
         //Verifica se foi recebido algum valor pelo Intent
         Log.i("INFO","Recebido: " + idFilme);
 
         MyTask task = new MyTask();
-        String urlDetalhesFilme = baseApi + "movie/" + idFilme +"?api_key=" + chaveApi + linguagem;
-        String urlVideoVideo = baseApi + idFilme + "/video";
+        MyTask task2 = new MyTask();
+         urlDetalhesFilme = baseApi + "movie/" + idFilme +"?api_key=" + chaveApi + linguagem;
+         urlVideoVideo = baseApi + "movie/" + idFilme + "/videos" + "?api_key=" + chaveApi + linguagem;
 
         List<String> strings = new ArrayList<>();
 
         strings.add(urlDetalhesFilme);
         strings.add(urlVideoVideo);
 
+        task2.execute(strings.get(1).toString());
         task.execute(strings.get(0).toString());
 
     }
@@ -101,56 +110,116 @@ public class DetalhesFilmes extends AppCompatActivity {
 
             String stringUrl = strings[0];
 
-            InputStream inputStream = null;
-            InputStreamReader inputStreamReader = null;
 
-            StringBuffer buffer = null;
 
-            try {
-                URL url = new URL(stringUrl);
-                //Faz a requisição, abre a conexão
-                HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
-                //Recupera os dados em Bytes
-                inputStream = conexao.getInputStream();
+            StringBuffer buffer = new StringBuffer();
 
-                //inputStreamReader lê os dados em Bytes e decodifica para caracteres
-                inputStreamReader = new InputStreamReader(inputStream);
+            if(stringUrl.contains(urlVideoVideo))
+            {
+                InputStream inputStream = null;
+                InputStreamReader inputStreamReader = null;
 
-                //Objeto utilizado para leitura dos caracteres do InputStreamReader
-                BufferedReader reader = new BufferedReader(inputStreamReader);
-
-                buffer = new StringBuffer();
-                String linha = "";
-
-                while ((linha = reader.readLine()) != null) {
-
-                    buffer.append(linha);
-                }
 
                 try {
-                    JSONObject jsonObject = new JSONObject(buffer.toString());
+                    URL url = new URL(stringUrl);
+                    //Faz a requisição, abre a conexão
+                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
 
-                    linkPoster = jsonObject.getString("poster_path");
+                    //Recupera os dados em Bytes
+                    inputStream = conexao.getInputStream();
 
-                    linkBackdrop = jsonObject.getString("backdrop_path");
+                    //inputStreamReader lê os dados em Bytes e decodifica para caracteres
+                    inputStreamReader = new InputStreamReader(inputStream);
 
-                    resumo = jsonObject.getString("overview");
-                    title = jsonObject.getString("title");
-                    data = jsonObject.getString("release_date");
-                    homepage = jsonObject.getString("homepage");
+                    //Objeto utilizado para leitura dos caracteres do InputStreamReader
+                    BufferedReader reader = new BufferedReader(inputStreamReader);
 
-                } catch (JSONException e) {
+
+                    String linha = "";
+
+                    while ((linha = reader.readLine()) != null) {
+
+                        buffer.append(linha);
+                    }
+
+                    JSONArray jsonArray = null;
+                    try {
+                        JSONObject jsonObject = new JSONObject(buffer.toString());
+                        jsonArray = jsonObject.getJSONArray("results");
+
+                        JSONObject posicao = jsonArray.getJSONObject(0);
+                        video = posicao.getString("key").toString();
+
+                        Log.i("INFO","KEY: " + video);
+                        retorno = "videoSucesso";
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Log.i("INFO","Segundo Processamento Realizado: " + urlVideoVideo);
+            }
+            if(stringUrl.contains(urlDetalhesFilme)){
+
+                InputStream inputStream = null;
+                InputStreamReader inputStreamReader = null;
+
+
+                try {
+                    URL url = new URL(stringUrl);
+                    //Faz a requisição, abre a conexão
+                    HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+
+                    //Recupera os dados em Bytes
+                    inputStream = conexao.getInputStream();
+
+                    //inputStreamReader lê os dados em Bytes e decodifica para caracteres
+                    inputStreamReader = new InputStreamReader(inputStream);
+
+                    //Objeto utilizado para leitura dos caracteres do InputStreamReader
+                    BufferedReader reader = new BufferedReader(inputStreamReader);
+
+
+                    String linha = "";
+
+                    while ((linha = reader.readLine()) != null) {
+
+                        buffer.append(linha);
+                    }
+
+                    try {
+                        JSONObject jsonObject = new JSONObject(buffer.toString());
+
+                        linkPoster = jsonObject.getString("poster_path");
+
+                        linkBackdrop = jsonObject.getString("backdrop_path");
+
+                        resumo = jsonObject.getString("overview");
+                        title = jsonObject.getString("title");
+                        data = jsonObject.getString("release_date");
+                        homepage = jsonObject.getString("homepage");
+
+                        retorno = "detalhesSucesso";
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+                //return buffer.toString();
+            return retorno;
 
-            return buffer.toString();
         }
 
         @Override
@@ -158,15 +227,25 @@ public class DetalhesFilmes extends AppCompatActivity {
 
             super.onPostExecute(resultado);
 
-            txtTitle.setText(title);
-            String video = "https://www.youtube.com/watch?v=50_Ala5BKBo";
-            Uri ideo = Uri.parse(video);
-            trailer.setVideoURI(ideo);
-            txtData.setText(data);
-            txtResumo.setText(resumo);
-            txtHome.setText(txtHome.getText()+ " " + homepage);
-            Picasso.get().load(urlImagensAPi + linkPoster).into(posterFilme);
-            Picasso.get().load(urlImagensAPi+ linkBackdrop).into(bannerFilme);
+            try{
+                if (retorno.contains("videoSucesso")) {
+                    Uri src = Uri.parse(video);
+                    trailer.setVideoURI(src);
+                }
+
+            if (retorno.contains("detalhesSucesso")) {
+                txtTitle.setText(title);
+                txtData.setText(data);
+                txtResumo.setText(resumo);
+                txtHome.setText("Homepage: " + homepage);
+                Picasso.get().load(urlImagensAPi + linkPoster).into(posterFilme);
+                Picasso.get().load(urlImagensAPi + linkBackdrop).into(bannerFilme);
+            }
+        }catch (Exception e)
+            {
+                Log.i("INFO", "Erro no processamento de componentes");
+            }
+
         }
     }
 }

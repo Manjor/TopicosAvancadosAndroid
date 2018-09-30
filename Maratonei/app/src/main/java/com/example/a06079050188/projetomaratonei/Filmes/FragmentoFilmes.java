@@ -46,6 +46,7 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
     String chaveApi = "?api_key=f814673a004bcd3dfd0e837cf1a0b020";
 
     String urlConsultaFilmes = baseApi + "movie/popular" + chaveApi + "&page=1" + linguagem;;
+    String urlConsultaAcao = baseApi + "movie/now_playing" + chaveApi + "&page=1" + linguagem;
 
     //Declara os botões de Categorias de Filmes
     private Button btnCartaz;
@@ -58,6 +59,7 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
     private Button btnDrama;
 
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -66,42 +68,27 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
         recyclerFilmes = view.findViewById(R.id.recycleFilmes);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
-
-
         recyclerFilmes.setLayoutManager(layoutManager);
 
-        final MyTask task = new MyTask();
+        adicionaUrl(urlConsultaAcao);
 
-        task.execute(urlConsultaFilmes);
-
-        //Cria o objeto do botão de Filmes em Cartaz e seta o valor da url para consulta
         btnCartaz = view.findViewById(R.id.btnCartaz);
         btnCartaz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                urlConsultaFilmes = baseApi + "popular" + chaveApi + "&page1" + linguagem;
-                Log.i("INFO","Clicou em Cartaz");
-                task.onPostExecute(urlConsultaFilmes);
-
+                adicionaUrl(urlConsultaFilmes);
             }
         });
-
-        //Cria o objeto do botao de Filmes de Ação e seta o valor da url para Consulta
-        btnAcao = view.findViewById(R.id.btnAcao);
-        btnAcao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                urlConsultaFilmes = baseApi + "genre/10749/movies" + chaveApi + "&page1" + linguagem;
-                Log.i("INFO","Clicou em Ação");
-                task.onPostExecute(urlConsultaFilmes);
-            }
-        });
-
-
-
 
         return view;
+
     }
+
+    public void adicionaUrl(String url){
+        MyTask task = new MyTask();
+        task.execute(url);
+    }
+
 
     public void adicionaSerieCard(String nomeFilme,String imagemFilme, int id)
     {
@@ -121,7 +108,7 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
         protected String doInBackground(String... strings) {
 
 
-            String stringUrl = strings[0];
+            String stringUrl = strings[strings.length - 1];
             InputStream inputStream = null;
             InputStreamReader inputStreamReader = null;
 
@@ -150,12 +137,37 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
 
                     buffer.append( linha );
                 }
+                String results = null;
+                String nomeSerie = null;
+                JSONArray jsonArray = null;
+
+                try {
+                    JSONObject jsonObject = new JSONObject(buffer.toString());
+                    jsonArray = jsonObject.getJSONArray("results");
+
+                    for(int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject e = jsonArray.getJSONObject(i);
+                        String strinJsonNomeSerie = e.getString("title");
+                        String backdropJsonSerie = e.getString("backdrop_path");
+                        int idJsonSerie = e.getInt("id");
+                        String urlImagemBanner = urlImagensAPi + backdropJsonSerie;
+
+                        adicionaSerieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
 
             return buffer.toString();
         }
@@ -164,33 +176,9 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
         protected void onPostExecute(String resultado) {
 
             super.onPostExecute(resultado);
-            String results = null;
-            String nomeSerie = null;
-            JSONArray jsonArray = null;
-
-            try {
-                JSONObject jsonObject = new JSONObject(resultado);
-                jsonArray = jsonObject.getJSONArray("results");
-
-                for(int i = 0; i < jsonArray.length(); i++)
-                {
-                    JSONObject e = jsonArray.getJSONObject(i);
-                    String strinJsonNomeSerie = e.getString("title");
-                    String backdropJsonSerie = e.getString("backdrop_path");
-                    int idJsonSerie = e.getInt("id");
-                    String urlImagemBanner = urlImagensAPi + backdropJsonSerie;
-
-                    adicionaSerieCard(strinJsonNomeSerie,urlImagemBanner,idJsonSerie);
-
-
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
             FilmesAdapter filmesAdapter = new FilmesAdapter( filmes );
             recyclerFilmes.setAdapter(filmesAdapter);
+
         }
     }
 
