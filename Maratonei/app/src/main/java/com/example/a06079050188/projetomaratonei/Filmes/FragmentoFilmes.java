@@ -63,6 +63,7 @@ public class FragmentoFilmes extends android.support.v4.app.Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.filmesfragment,container,false);
 
         recyclerFilmes = view.findViewById(R.id.recycleFilmes);
